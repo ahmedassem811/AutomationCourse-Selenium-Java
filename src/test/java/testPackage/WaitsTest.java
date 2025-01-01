@@ -39,9 +39,9 @@ public class WaitsTest {
         WebDriver driver = new ChromeDriver();
         driver.navigate().to("https://www.selenium.dev/selenium/web/dynamic.html");
         driver.findElement(By.id("adder")).click();
-        WebElement box = driver.findElement(By.id("box0"));
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(d -> box.isDisplayed());
+        wait.until(d -> driver.findElement(By.id("box0")).isDisplayed());
+        WebElement box = driver.findElement(By.id("box0"));
         Assert.assertTrue(box.isDisplayed());
         driver.quit();
     }
@@ -59,11 +59,11 @@ public class WaitsTest {
 
         wait.until(
                 d -> {
-                    WebElement box = driver.findElement(By.id("box0"));
-                    box.isDisplayed();
+                    driver.findElement(By.id("box0")).isDisplayed();
                     return true;
                 });
 
+        Assert.assertTrue(driver.findElement(By.id("box0")).isDisplayed());
         driver.quit();
     }
 }
